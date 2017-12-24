@@ -1,6 +1,91 @@
+
+
+
+
 <html>
-  <head></head>
+  <head>
+    <link rel="stylesheet" href="app.css">
+    <style media="screen">
+      .aaaaa {
+        color: #1e9370;
+      }
+      .b {.....}
+      .text {
+        border: 1px solid red;
+        background-color: yellow;
+      }
+
+      .margin {
+        margin-top: 50px;
+        margin-bottom: 100px;
+      }
+      .margin-right {
+        margin-right: 20px;
+      }
+
+      .padding {
+        padding: 20px;
+      }
+
+      .position-relative {
+        position: relative;
+        right: 200px;
+        bottom: 80px;
+      }
+
+      .position-fixed {
+        position: fixed;
+        left: 200px;
+        top: 300px;
+      }
+    </style>
+  </head>
   <body>
+    <h1>網頁123</h1>
+
+
+<fb:login-button
+  scope="public_profile,email,user_likes"
+  onlogin="checkLoginState();">
+</fb:login-button>
+
+<div id="list">my likes</div>
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1528781920572389',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v2.11'
+        });
+
+        FB.AppEvents.logPageView();
+
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+
+       function checkLoginState() {
+         FB.getLoginStatus(function(response) {
+           FB.api('me/likes', function(res) {
+             for(i = 0; i < res.data.length; i++){
+               document.getElementById('list').innerHTML += res.data[i].name
+             }
+           });
+
+         });
+       }
+    </script>
+
+
     <script>
       for( i=-5;i<=5;i++){
         temp=""
@@ -15,5 +100,6 @@
         console.log(temp);
       }
     </script>
+
   </body>
 </html>
